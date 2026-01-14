@@ -1,0 +1,87 @@
+/* Responsive Design Enhancements for Mobile */
+
+/* Media query untuk tablet */
+@media (max-width: 1024px) {
+
+    /* Camera Page - adjust grid */
+    .camera-page .content {
+        grid-template-columns: 1fr !important;
+    }
+
+    .camera-page .preview-section {
+        max-height: none !important;
+    }
+
+    /* Edit Download Page - adjust grid */
+    .edit-download-page .content {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Media query untuk mobile */
+@media (max-width: 768px) {
+
+    /* Landing Page */
+    .landing-page .hero-title {
+        font-size: 2.5rem !important;
+    }
+
+    .landing-page .floating-card {
+        display: none !important;
+        /* Hide floating elements on mobile */
+    }
+
+    .landing-page .nav-links {
+        display: none !important;
+        /* Hide nav links on small screens */
+    }
+
+    /* Layout Selection */
+    .layout-selection .layout-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 0.5rem !important;
+    }
+
+    /* Camera Page */
+    .camera-page {
+        padding: 1rem !important;
+    }
+
+    .camera-page .content {
+        gap: 1rem !important;
+    }
+
+    .camera-page .preview-section {
+        order: -1;
+        /* Move preview to top on mobile */
+    }
+
+    /* Edit Download Page */
+    .edit-download-page {
+        padding: 1rem !important;
+    }
+
+    .edit-download-page .content {
+        gap: 1rem !important;
+    }
+
+    .edit-download-page .color-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+}
+
+/* Very small mobile screens */
+@media (max-width: 480px) {
+    .landing-page .hero-title {
+        font-size: 2rem !important;
+    }
+
+    .landing-page .hero-buttons {
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+
+    .landing-page .hero-buttons button {
+        width: 100% !important;
+    }
+}

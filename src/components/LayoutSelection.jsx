@@ -1,0 +1,264 @@
+import React from 'react';
+import { LAYOUTS } from '../utils/layoutConfig';
+import { getThemeColors } from '../utils/themeConfig';
+import ThemeToggleButton from './ThemeToggleButton';
+
+const LayoutSelection = ({ onSelectLayout, theme, toggleTheme }) => {
+    const layoutArray = Object.values(LAYOUTS);
+    const colors = getThemeColors(theme);
+
+    return (
+        <div style={{ ...styles.layoutSelection, background: colors.background }}>
+            {/* Theme Toggle */}
+            <ThemeToggleButton theme={theme} toggleTheme={toggleTheme} />
+
+            {/* Back Button */}
+            <button
+                onClick={() => window.location.reload()}
+                style={styles.backButton}
+                onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+                onMouseLeave={(e) => e.currentTarget.style.opacity = '0.7'}
+            >
+                ← Back
+            </button>
+
+            {/* Header */}
+            <div style={styles.header}>
+                <h1 style={styles.title}>Select Your Layout</h1>
+                <p style={styles.subtitle}>Choose how you want to capture the moment</p>
+            </div>
+
+            {/* Layout Grid */}
+            <div style={styles.layoutGrid}>
+                {layoutArray.map((layout, index) => (
+                    <div
+                        key={layout.id}
+                        style={styles.layoutCard}
+                        onClick={() => onSelectLayout(layout.id)}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-8px)';
+                            e.currentTarget.style.boxShadow = '0 20px 40px rgba(236, 72, 153, 0.3)';
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0)';
+                            e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.4)';
+                        }}
+                    >
+                        {/* Selection Circle Icon */}
+                        <div style={styles.selectCircle}>
+                            <div style={styles.selectCircleInner}></div>
+                        </div>
+
+                        {/* Layout Preview */}
+                        <div style={styles.layoutPreview}>
+                            {renderLayoutPreview(layout)}
+                        </div>
+
+                        {/* Layout Info */}
+                        <div style={styles.layoutInfo}>
+                            <h2 style={styles.layoutName}>
+                                {getLayoutDisplayName(layout.id)}
+                            </h2>
+                            <p style={styles.layoutDescription}>{layout.description}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+// Helper function to get display name
+const getLayoutDisplayName = (id) => {
+    const names = {
+        'C': 'Single Shot',
+        'B': '3-Photo Strip',
+        'A': 'Photo Strip',
+        'D': '4-Photo Grid'
+    };
+    return names[id] || `Layout ${id}`;
+};
+
+// Helper function to render layout preview
+const renderLayoutPreview = (layout) => {
+    const previewBoxes = [];
+
+    if (layout.gridType === 'vertical-strip') {
+        // Vertical strip layout
+        for (let i = 0; i < layout.poses; i++) {
+            previewBoxes.push(
+                <div key={i} style={styles.previewBox}></div>
+            );
+        }
+        return (
+            <div style={styles.previewContainerVertical}>
+                {previewBoxes}
+            </div>
+        );
+    } else if (layout.gridType === 'grid-2x3') {
+        // Grid 2x2 layout (4 photos)
+        for (let i = 0; i < 4; i++) {
+            previewBoxes.push(
+                <div key={i} style={styles.previewBoxGrid}></div>
+            );
+        }
+        return (
+            <div style={styles.previewContainerGrid}>
+                {previewBoxes}
+            </div>
+        );
+    }
+};
+
+// Styles - Modern Dark Theme
+const styles = {
+    layoutSelection: {
+        minHeight: '100vh',
+        background: 'linear-gradient(180deg, #2D1B3D 0%, #1a0f29 100%)',
+        padding: '2rem',
+        position: 'relative',
+    },
+
+    // Back Button
+    backButton: {
+        position: 'absolute',
+        top: '2rem',
+        left: '2rem',
+        background: 'transparent',
+        color: 'rgba(255, 255, 255, 0.7)',
+        border: 'none',
+        fontSize: '1rem',
+        fontWeight: '500',
+        cursor: 'pointer',
+        padding: '0.5rem',
+        transition: 'all 0.3s ease',
+        opacity: 0.7,
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+    },
+
+    // Header
+    header: {
+        textAlign: 'center',
+        marginBottom: '4rem',
+        paddingTop: '3rem',
+    },
+    title: {
+        fontSize: '3rem',
+        fontWeight: '800',
+        fontFamily: 'Poppins, sans-serif',
+        color: '#FFFFFF',
+        marginBottom: '0.75rem',
+        letterSpacing: '-0.5px',
+    },
+    subtitle: {
+        fontSize: '1.1rem',
+        color: 'rgba(255, 255, 255, 0.6)',
+        fontWeight: '400',
+    },
+
+    // Layout Grid
+    layoutGrid: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gap: '2rem',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '0 1rem',
+    },
+
+    // Layout Card
+    layoutCard: {
+        background: 'rgba(255, 255, 255, 0.05)',
+        backdropFilter: 'blur(10px)',
+        borderRadius: '24px',
+        padding: '2rem',
+        cursor: 'pointer',
+        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+
+    // Selection Circle
+    selectCircle: {
+        position: 'absolute',
+        top: '1.5rem',
+        right: '1.5rem',
+        width: '24px',
+        height: '24px',
+        borderRadius: '50%',
+        border: '2px solid rgba(255, 255, 255, 0.3)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        transition: 'all 0.3s ease',
+    },
+    selectCircleInner: {
+        width: '12px',
+        height: '12px',
+        borderRadius: '50%',
+        background: 'transparent',
+    },
+
+    // Layout Preview
+    layoutPreview: {
+        width: '100%',
+        marginBottom: '1.5rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '280px',
+    },
+    previewContainerVertical: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.5rem',
+        width: '100%',
+        maxWidth: '180px',
+    },
+    previewContainerGrid: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: '0.5rem',
+        width: '100%',
+        maxWidth: '200px',
+    },
+    previewBox: {
+        aspectRatio: '4/3',
+        background: 'linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)',
+        borderRadius: '10px',
+        border: '2px solid rgba(0, 0, 0, 0.3)',
+    },
+    previewBoxGrid: {
+        aspectRatio: '1/1',
+        background: 'linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)',
+        borderRadius: '10px',
+        border: '2px solid rgba(0, 0, 0, 0.3)',
+    },
+
+    // Layout Info
+    layoutInfo: {
+        textAlign: 'center',
+        width: '100%',
+    },
+    layoutName: {
+        fontSize: '1.5rem',
+        fontWeight: '700',
+        color: '#FFFFFF',
+        marginBottom: '0.5rem',
+        fontFamily: 'Poppins, sans-serif',
+    },
+    layoutDescription: {
+        color: 'rgba(255, 255, 255, 0.6)',
+        fontSize: '0.9rem',
+        fontWeight: '400',
+        lineHeight: '1.5',
+    },
+};
+
+export default LayoutSelection;
