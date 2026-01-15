@@ -18,20 +18,37 @@ const LandingPage = ({ onGetStarted, theme, toggleTheme }) => {
             <ThemeToggleButton theme={theme} toggleTheme={toggleTheme} />
 
             {/* Gradient Background Overlay */}
-            <div style={styles.gradientOverlay}></div>
+            {theme === 'dark' && <div style={styles.gradientOverlay}></div>}
 
             {/* Navigation */}
-            <nav style={styles.nav}>
+            <nav style={{ ...styles.nav, background: colors.navBg, borderBottom: `1px solid ${colors.cardBorder}` }}>
                 <div style={styles.navContainer}>
                     <div style={styles.logo}>
-                        <span style={styles.logoIcon}>📸</span>
+                        <svg style={styles.logoSvg} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="10" y="25" width="80" height="65" rx="8" fill="url(#grad1)"/>
+                            <rect x="15" y="30" width="70" height="50" rx="6" fill="white" opacity="0.9"/>
+                            <circle cx="50" cy="55" r="18" fill="url(#grad2)"/>
+                            <circle cx="50" cy="55" r="12" fill="white" opacity="0.3"/>
+                            <rect x="70" y="35" width="10" height="10" rx="2" fill="#EC4899"/>
+                            <path d="M35 15 L45 15 L50 25 L35 25 Z" fill="url(#grad1)"/>
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style={{stopColor:'#EC4899',stopOpacity:1}} />
+                                    <stop offset="100%" style={{stopColor:'#8B5CF6',stopOpacity:1}} />
+                                </linearGradient>
+                                <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style={{stopColor:'#EC4899',stopOpacity:1}} />
+                                    <stop offset="100%" style={{stopColor:'#8B5CF6',stopOpacity:1}} />
+                                </linearGradient>
+                            </defs>
+                        </svg>
                         <span style={styles.logoText}>One 2 Kie</span>
                     </div>
                     <div style={styles.navLinks}>
-                        <a onClick={() => scrollToSection('home')} style={styles.navLink}>Home</a>
-                        <a onClick={() => scrollToSection('faq')} style={styles.navLink}>FAQ</a>
-                        <a onClick={() => scrollToSection('privacy')} style={styles.navLink}>Privacy</a>
-                        <a onClick={() => scrollToSection('about')} style={styles.navLink}>About</a>
+                        <a onClick={() => scrollToSection('home')} style={{ ...styles.navLink, color: colors.textSecondary }}>Home</a>
+                        <a onClick={() => scrollToSection('faq')} style={{ ...styles.navLink, color: colors.textSecondary }}>FAQ</a>
+                        <a onClick={() => scrollToSection('privacy')} style={{ ...styles.navLink, color: colors.textSecondary }}>Privacy</a>
+                        <a onClick={() => scrollToSection('about')} style={{ ...styles.navLink, color: colors.textSecondary }}>About</a>
                     </div>
                 </div>
             </nav>
@@ -41,12 +58,12 @@ const LandingPage = ({ onGetStarted, theme, toggleTheme }) => {
                 <div style={styles.heroContent}>
                     <div className="animate-fadeIn">
                         <div style={styles.badge}>✨ Free Photo Booth Online</div>
-                        <h1 style={styles.heroTitle}>
+                        <h1 style={{ ...styles.heroTitle, color: colors.text }}>
                             One 2 Kie
                             <br />
                             <span style={styles.heroTitleGradient}>Photo Booth Free</span>
                         </h1>
-                        <p style={styles.heroSubtitle}>
+                        <p style={{ ...styles.heroSubtitle, color: colors.textSecondary }}>
                             Abadikan momen terbaik kamu dengan berbagai pilihan layout menarik.
                             <br />
                             Gratis, mudah, dan langsung bisa di-download!
@@ -68,9 +85,17 @@ const LandingPage = ({ onGetStarted, theme, toggleTheme }) => {
                             </button>
                             <button
                                 onClick={() => scrollToSection('faq')}
-                                style={styles.secondaryButton}
-                                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)'}
-                                onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
+                                style={{ ...styles.secondaryButton, 
+                                    background: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
+                                    border: theme === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '2px solid rgba(0, 0, 0, 0.15)',
+                                    color: colors.text 
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.background = theme === 'dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.1)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.background = theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)';
+                                }}
                             >
                                 Learn More →
                             </button>
@@ -86,41 +111,41 @@ const LandingPage = ({ onGetStarted, theme, toggleTheme }) => {
             {/* Features Section */}
             <section style={styles.features}>
                 <div style={styles.container}>
-                    <h2 style={styles.sectionTitle}>Kenapa Pilih One 2 Kie?</h2>
+                    <h2 style={{ ...styles.sectionTitle, color: colors.text }}>Kenapa Pilih One 2 Kie?</h2>
                     <div style={styles.featuresGrid}>
-                        <div style={styles.featureCard} className="animate-slideInUp">
+                        <div style={{ ...styles.featureCard, background: colors.cardBg, border: `1px solid ${colors.cardBorder}` }} className="animate-slideInUp">
                             <div style={styles.featureIconWrapper}>
                                 <div style={styles.featureIcon}>📸</div>
                             </div>
-                            <h3 style={styles.featureTitle}>Berbagai Layout</h3>
-                            <p style={styles.featureText}>
+                            <h3 style={{ ...styles.featureTitle, color: colors.text }}>Berbagai Layout</h3>
+                            <p style={{ ...styles.featureText, color: colors.textSecondary }}>
                                 Pilih dari 4 layout berbeda dengan jumlah pose 2, 3, 4, atau 6 foto
                             </p>
                         </div>
-                        <div style={styles.featureCard} className="animate-slideInUp">
+                        <div style={{ ...styles.featureCard, background: colors.cardBg, border: `1px solid ${colors.cardBorder}` }} className="animate-slideInUp">
                             <div style={styles.featureIconWrapper}>
                                 <div style={styles.featureIcon}>🎨</div>
                             </div>
-                            <h3 style={styles.featureTitle}>Custom Background</h3>
-                            <p style={styles.featureText}>
+                            <h3 style={{ ...styles.featureTitle, color: colors.text }}>Custom Background</h3>
+                            <p style={{ ...styles.featureText, color: colors.textSecondary }}>
                                 Edit warna background sesuai keinginan untuk hasil yang personal
                             </p>
                         </div>
-                        <div style={styles.featureCard} className="animate-slideInUp">
+                        <div style={{ ...styles.featureCard, background: colors.cardBg, border: `1px solid ${colors.cardBorder}` }} className="animate-slideInUp">
                             <div style={styles.featureIconWrapper}>
                                 <div style={styles.featureIcon}>⚡</div>
                             </div>
-                            <h3 style={styles.featureTitle}>Mudah & Cepat</h3>
-                            <p style={styles.featureText}>
+                            <h3 style={{ ...styles.featureTitle, color: colors.text }}>Mudah & Cepat</h3>
+                            <p style={{ ...styles.featureText, color: colors.textSecondary }}>
                                 Proses sederhana: pilih layout, ambil foto, edit, dan download!
                             </p>
                         </div>
-                        <div style={styles.featureCard} className="animate-slideInUp">
+                        <div style={{ ...styles.featureCard, background: colors.cardBg, border: `1px solid ${colors.cardBorder}` }} className="animate-slideInUp">
                             <div style={styles.featureIconWrapper}>
                                 <div style={styles.featureIcon}>💯</div>
                             </div>
-                            <h3 style={styles.featureTitle}>100% Gratis</h3>
-                            <p style={styles.featureText}>
+                            <h3 style={{ ...styles.featureTitle, color: colors.text }}>100% Gratis</h3>
+                            <p style={{ ...styles.featureText, color: colors.textSecondary }}>
                                 Tidak ada biaya tersembunyi. Semua fitur gratis untuk kamu!
                             </p>
                         </div>
@@ -131,7 +156,7 @@ const LandingPage = ({ onGetStarted, theme, toggleTheme }) => {
             {/* FAQ Section */}
             <section id="faq" style={styles.faq}>
                 <div style={styles.container}>
-                    <h2 style={styles.sectionTitle}>Frequently Asked Questions</h2>
+                    <h2 style={{ ...styles.sectionTitle, color: colors.text }}>Frequently Asked Questions</h2>
                     <div style={styles.faqList}>
                         {[
                             {
@@ -151,9 +176,9 @@ const LandingPage = ({ onGetStarted, theme, toggleTheme }) => {
                                 a: "Semua proses dilakukan di browser kamu. Kami tidak menyimpan foto kamu di server manapun. Privasi kamu terjaga 100%."
                             }
                         ].map((item, index) => (
-                            <div key={index} style={styles.faqItem}>
-                                <h3 style={styles.faqQuestion}>❓ {item.q}</h3>
-                                <p style={styles.faqAnswer}>{item.a}</p>
+                            <div key={index} style={{ ...styles.faqItem, background: colors.cardBg, border: `1px solid ${colors.cardBorder}` }}>
+                                <h3 style={{ ...styles.faqQuestion, color: colors.text }}>❓ {item.q}</h3>
+                                <p style={{ ...styles.faqAnswer, color: colors.textSecondary }}>{item.a}</p>
                             </div>
                         ))}
                     </div>
@@ -163,30 +188,30 @@ const LandingPage = ({ onGetStarted, theme, toggleTheme }) => {
             {/* Privacy Section */}
             <section id="privacy" style={styles.privacy}>
                 <div style={styles.container}>
-                    <h2 style={styles.sectionTitle}>Privacy Policy</h2>
+                    <h2 style={{ ...styles.sectionTitle, color: colors.text }}>Privacy Policy</h2>
                     <div style={styles.privacyContent}>
-                        <div style={styles.privacyCard}>
-                            <h3 style={styles.privacySubtitle}>🔒 Keamanan & Privasi Anda</h3>
-                            <p style={styles.privacyText}>
+                        <div style={{ ...styles.privacyCard, background: colors.cardBg, border: `1px solid ${colors.cardBorder}` }}>
+                            <h3 style={{ ...styles.privacySubtitle, color: colors.text }}>🔒 Keamanan & Privasi Anda</h3>
+                            <p style={{ ...styles.privacyText, color: colors.textSecondary }}>
                                 One 2 Kie Photo Booth sangat menghargai privasi Anda. Semua foto diproses
                                 langsung di browser Anda tanpa upload ke server.
                             </p>
                             <div style={styles.privacyPoints}>
                                 <div style={styles.privacyPoint}>
                                     <span style={styles.privacyIcon}>✓</span>
-                                    <span style={styles.privacyPointText}>Tidak ada penyimpanan data</span>
+                                    <span style={{ ...styles.privacyPointText, color: colors.textSecondary }}>Tidak ada penyimpanan data</span>
                                 </div>
                                 <div style={styles.privacyPoint}>
                                     <span style={styles.privacyIcon}>✓</span>
-                                    <span style={styles.privacyPointText}>Akses kamera dapat dicabut kapan saja</span>
+                                    <span style={{ ...styles.privacyPointText, color: colors.textSecondary }}>Akses kamera dapat dicabut kapan saja</span>
                                 </div>
                                 <div style={styles.privacyPoint}>
                                     <span style={styles.privacyIcon}>✓</span>
-                                    <span style={styles.privacyPointText}>Tanpa tracking atau analytics</span>
+                                    <span style={{ ...styles.privacyPointText, color: colors.textSecondary }}>Tanpa tracking atau analytics</span>
                                 </div>
                                 <div style={styles.privacyPoint}>
                                     <span style={styles.privacyIcon}>✓</span>
-                                    <span style={styles.privacyPointText}>100% aman dan terpercaya</span>
+                                    <span style={{ ...styles.privacyPointText, color: colors.textSecondary }}>100% aman dan terpercaya</span>
                                 </div>
                             </div>
                         </div>
@@ -197,27 +222,27 @@ const LandingPage = ({ onGetStarted, theme, toggleTheme }) => {
             {/* About Section */}
             <section id="about" style={styles.about}>
                 <div style={styles.container}>
-                    <h2 style={styles.sectionTitle}>About the Creator</h2>
+                    <h2 style={{ ...styles.sectionTitle, color: colors.text }}>About the Creator</h2>
                     <div style={styles.aboutContent}>
-                        <div style={styles.aboutCard}>
+                        <div style={{ ...styles.aboutCard, background: colors.cardBg, border: `1px solid ${colors.cardBorder}` }}>
                             <div style={styles.aboutIcon}>👨‍💻</div>
-                            <h3 style={styles.aboutName}>One 2 Kie Team</h3>
-                            <p style={styles.aboutDescription}>
+                            <h3 style={{ ...styles.aboutName, color: colors.text }}>One 2 Kie Team</h3>
+                            <p style={{ ...styles.aboutDescription, color: colors.textSecondary }}>
                                 One 2 Kie Photo Booth dibuat dengan ❤️ untuk memberikan pengalaman photo booth
                                 yang menyenangkan dan mudah diakses oleh siapa saja.
                             </p>
-                            <div style={styles.aboutStats}>
+                            <div style={{ ...styles.aboutStats, borderTop: `1px solid ${colors.cardBorder}`, borderBottom: `1px solid ${colors.cardBorder}` }}>
                                 <div style={styles.statItem}>
                                     <div style={styles.statNumber}>100%</div>
-                                    <div style={styles.statLabel}>Free</div>
+                                    <div style={{ ...styles.statLabel, color: colors.textSecondary }}>Free</div>
                                 </div>
                                 <div style={styles.statItem}>
                                     <div style={styles.statNumber}>0</div>
-                                    <div style={styles.statLabel}>Ads</div>
+                                    <div style={{ ...styles.statLabel, color: colors.textSecondary }}>Ads</div>
                                 </div>
                                 <div style={styles.statItem}>
                                     <div style={styles.statNumber}>∞</div>
-                                    <div style={styles.statLabel}>Photos</div>
+                                    <div style={{ ...styles.statLabel, color: colors.textSecondary }}>Photos</div>
                                 </div>
                             </div>
                         </div>
@@ -226,9 +251,9 @@ const LandingPage = ({ onGetStarted, theme, toggleTheme }) => {
             </section>
 
             {/* Footer */}
-            <footer style={styles.footer}>
+            <footer style={{ ...styles.footer, borderTop: `1px solid ${colors.cardBorder}` }}>
                 <div style={styles.container}>
-                    <p style={styles.footerText}>
+                    <p style={{ ...styles.footerText, color: colors.textSecondary }}>
                         © 2026 One 2 Kie Photo Booth Free. Made with ❤️ for everyone.
                     </p>
                 </div>
@@ -264,7 +289,6 @@ const styles = {
         top: 0,
         left: 0,
         right: 0,
-        background: 'rgba(15, 10, 30, 0.8)',
         backdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
         zIndex: 1000,
@@ -295,13 +319,16 @@ const styles = {
         WebkitTextFillColor: 'transparent',
         backgroundClip: 'text',
     },
+    logoSvg: {
+        width: '40px',
+        height: '40px',
+    },
     navLinks: {
         display: 'flex',
         gap: '2.5rem',
         alignItems: 'center',
     },
     navLink: {
-        color: 'rgba(255, 255, 255, 0.7)',
         fontWeight: '500',
         cursor: 'pointer',
         transition: 'color 0.3s ease',
@@ -329,7 +356,7 @@ const styles = {
     badge: {
         display: 'inline-block',
         background: 'linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)',
-        color: 'white',
+        color: '#FFFFFF',
         padding: '0.75rem 2rem',
         borderRadius: '50px',
         fontSize: '1rem',
@@ -343,7 +370,6 @@ const styles = {
         marginBottom: '1.5rem',
         lineHeight: '1.1',
         fontFamily: 'Poppins, sans-serif',
-        color: '#FFFFFF',
     },
     heroTitleGradient: {
         background: 'linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)',
@@ -353,7 +379,6 @@ const styles = {
     },
     heroSubtitle: {
         fontSize: '1.35rem',
-        color: 'rgba(255, 255, 255, 0.7)',
         marginBottom: '3rem',
         lineHeight: '1.8',
     },
@@ -365,7 +390,7 @@ const styles = {
     },
     primaryButton: {
         background: 'linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)',
-        color: 'white',
+        color: '#FFFFFF',
         padding: '1.25rem 3rem',
         fontSize: '1.2rem',
         borderRadius: '50px',
@@ -377,14 +402,11 @@ const styles = {
         transition: 'all 0.3s ease',
     },
     secondaryButton: {
-        background: 'rgba(255, 255, 255, 0.1)',
         backdropFilter: 'blur(10px)',
-        color: 'white',
         padding: '1.25rem 3rem',
         fontSize: '1.2rem',
         borderRadius: '50px',
         fontWeight: '600',
-        border: '1px solid rgba(255, 255, 255, 0.2)',
         cursor: 'pointer',
         transition: 'all 0.3s ease',
     },
@@ -427,7 +449,6 @@ const styles = {
         textAlign: 'center',
         marginBottom: '4rem',
         fontFamily: 'Poppins, sans-serif',
-        color: '#FFFFFF',
     },
 
     // Features
@@ -443,10 +464,8 @@ const styles = {
     },
     featureCard: {
         padding: '2.5rem',
-        background: 'rgba(255, 255, 255, 0.05)',
         backdropFilter: 'blur(10px)',
         borderRadius: '24px',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
         textAlign: 'center',
         transition: 'all 0.4s ease',
         cursor: 'default',
@@ -469,11 +488,9 @@ const styles = {
         fontSize: '1.5rem',
         fontWeight: '700',
         marginBottom: '1rem',
-        color: '#FFFFFF',
         fontFamily: 'Poppins, sans-serif',
     },
     featureText: {
-        color: 'rgba(255, 255, 255, 0.7)',
         lineHeight: '1.7',
     },
 
@@ -491,21 +508,17 @@ const styles = {
         gap: '2rem',
     },
     faqItem: {
-        background: 'rgba(255, 255, 255, 0.05)',
         backdropFilter: 'blur(10px)',
         padding: '2.5rem',
         borderRadius: '20px',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
     },
     faqQuestion: {
         fontSize: '1.35rem',
         fontWeight: '700',
         marginBottom: '1rem',
-        color: '#FFFFFF',
         fontFamily: 'Poppins, sans-serif',
     },
     faqAnswer: {
-        color: 'rgba(255, 255, 255, 0.7)',
         lineHeight: '1.8',
     },
 
@@ -520,21 +533,17 @@ const styles = {
         margin: '0 auto',
     },
     privacyCard: {
-        background: 'rgba(255, 255, 255, 0.05)',
         backdropFilter: 'blur(10px)',
         padding: '3rem',
         borderRadius: '24px',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
     },
     privacySubtitle: {
         fontSize: '1.75rem',
         fontWeight: '700',
         marginBottom: '1.5rem',
-        color: '#FFFFFF',
         fontFamily: 'Poppins, sans-serif',
     },
     privacyText: {
-        color: 'rgba(255, 255, 255, 0.7)',
         lineHeight: '1.8',
         marginBottom: '2rem',
     },
@@ -556,11 +565,11 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: 'white',
+        color: '#FFFFFF',
         fontWeight: '700',
     },
     privacyPointText: {
-        color: 'rgba(255, 255, 255, 0.8)',
+        // color applied inline with theme
     },
 
     // About
@@ -574,12 +583,10 @@ const styles = {
         margin: '0 auto',
     },
     aboutCard: {
-        background: 'rgba(255, 255, 255, 0.05)',
         backdropFilter: 'blur(10px)',
         padding: '4rem',
         borderRadius: '24px',
         textAlign: 'center',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
     },
     aboutIcon: {
         fontSize: '5rem',
@@ -589,11 +596,9 @@ const styles = {
         fontSize: '2.5rem',
         fontWeight: '800',
         marginBottom: '1.5rem',
-        color: '#FFFFFF',
         fontFamily: 'Poppins, sans-serif',
     },
     aboutDescription: {
-        color: 'rgba(255, 255, 255, 0.7)',
         lineHeight: '1.8',
         marginBottom: '3rem',
         fontSize: '1.1rem',
@@ -602,8 +607,6 @@ const styles = {
         display: 'flex',
         justifyContent: 'space-around',
         padding: '2.5rem 0',
-        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
     },
     statItem: {
         textAlign: 'center',
@@ -618,7 +621,6 @@ const styles = {
         fontFamily: 'Poppins, sans-serif',
     },
     statLabel: {
-        color: 'rgba(255, 255, 255, 0.6)',
         fontSize: '1rem',
         fontWeight: '600',
         marginTop: '0.5rem',
@@ -627,13 +629,11 @@ const styles = {
     // Footer
     footer: {
         padding: '3rem 0',
-        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
         position: 'relative',
         zIndex: 1,
     },
     footerText: {
         textAlign: 'center',
-        color: 'rgba(255, 255, 255, 0.5)',
         fontSize: '0.95rem',
     },
 };
