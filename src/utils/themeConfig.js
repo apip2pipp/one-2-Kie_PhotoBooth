@@ -3,14 +3,17 @@ export const getThemeColors = (theme) => {
     if (theme === 'light') {
         return {
             // Light Theme
-            background: '#FFFFFF',
+            background: 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 50%, #F3F4F6 100%)',
             backgroundGradient: 'linear-gradient(135deg, #F9FAFB 0%, #E5E7EB 100%)',
-            text: '#1F2937',
-            textSecondary: '#6B7280',
-            cardBg: 'rgba(0, 0, 0, 0.03)',
+            text: '#111827',
+            textSecondary: '#4B5563',
+            cardBg: 'rgba(255, 255, 255, 0.8)',
             cardBorder: 'rgba(0, 0, 0, 0.1)',
-            glassBg: 'rgba(255, 255, 255, 0.95)',
-            glassBorder: 'rgba(0, 0, 0, 0.1)',
+            glassBg: 'rgba(255, 255, 255, 0.9)',
+            glassBorder: 'rgba(0, 0, 0, 0.15)',
+            navBg: 'rgba(255, 255, 255, 0.9)',
+            badge: 'linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)',
+            buttonText: '#FFFFFF',
         };
     }
 
@@ -24,5 +27,8 @@ export const getThemeColors = (theme) => {
         cardBorder: 'rgba(255, 255, 255, 0.1)',
         glassBg: 'rgba(255, 255, 255, 0.05)',
         glassBorder: 'rgba(255, 255, 255, 0.1)',
+        navBg: 'rgba(15, 10, 30, 0.8)',
+        badge: 'linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)',
+        buttonText: '#FFFFFF',
     };
 };
