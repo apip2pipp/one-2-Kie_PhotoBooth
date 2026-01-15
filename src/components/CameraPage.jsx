@@ -80,15 +80,15 @@ const CameraPage = ({ selectedLayout, onComplete, onBack, theme, toggleTheme }) 
 
             {/* Header */}
             <div style={styles.header}>
-                <button onClick={onBack} style={styles.backButton}>
+                <button onClick={onBack} style={{ ...styles.backButton, background: colors.cardBg, color: colors.text, border: `1px solid ${colors.cardBorder}` }}>
                     ← Ganti Layout
                 </button>
                 <div style={styles.headerInfo}>
-                    <h2 style={styles.layoutName}>{layout.name}</h2>
+                    <h2 style={{ ...styles.layoutName, color: colors.text }}>{layout.name}</h2>
                     <div style={styles.progressBar}>
                         <div style={{ ...styles.progressFill, width: `${progress}%` }}></div>
                     </div>
-                    <p style={styles.progressText}>
+                    <p style={{ ...styles.progressText, color: colors.textSecondary }}>
                         Foto {capturedPhotos.length} dari {totalPoses}
                     </p>
                 </div>
@@ -130,7 +130,7 @@ const CameraPage = ({ selectedLayout, onComplete, onBack, theme, toggleTheme }) 
                                 )}
 
                                 {/* Pose Indicator */}
-                                <div style={styles.poseIndicator}>
+                                <div style={{ ...styles.poseIndicator, color: colors.text, background: colors.cardBg }}>
                                     Pose #{currentPoseIndex + 1}
                                 </div>
                             </div>
@@ -150,8 +150,8 @@ const CameraPage = ({ selectedLayout, onComplete, onBack, theme, toggleTheme }) 
                     {isComplete && (
                         <div style={styles.completionMessage}>
                             <div style={styles.completionIcon}>✅</div>
-                            <h2 style={styles.completionTitle}>Semua Foto Berhasil Diambil!</h2>
-                            <p style={styles.completionText}>
+                            <h2 style={{ ...styles.completionTitle, color: colors.text }}>Semua Foto Berhasil Diambil!</h2>
+                            <p style={{ ...styles.completionText, color: colors.textSecondary }}>
                                 Sedang memproses ke halaman edit...
                             </p>
                         </div>
@@ -160,7 +160,7 @@ const CameraPage = ({ selectedLayout, onComplete, onBack, theme, toggleTheme }) 
 
                 {/* Preview Grid */}
                 <div style={styles.previewSection}>
-                    <h3 style={styles.previewTitle}>
+                    <h3 style={{ ...styles.previewTitle, color: colors.text }}>
                         <span style={styles.previewIcon}>🖼️</span>
                         Preview Foto
                     </h3>
@@ -187,7 +187,7 @@ const CameraPage = ({ selectedLayout, onComplete, onBack, theme, toggleTheme }) 
                                         <div style={styles.placeholderIcon}>
                                             {index === currentPoseIndex ? '📷' : '⏳'}
                                         </div>
-                                        <div style={styles.placeholderText}>
+                                        <div style={{ ...styles.placeholderText, color: colors.textSecondary }}>
                                             {index === currentPoseIndex ? 'Next' : `Pose ${index + 1}`}
                                         </div>
                                     </div>
@@ -205,7 +205,6 @@ const CameraPage = ({ selectedLayout, onComplete, onBack, theme, toggleTheme }) 
 const styles = {
     cameraPage: {
         minHeight: '100vh',
-        background: '#0F0A1E',
         padding: '2rem',
         position: 'relative',
     },
@@ -215,15 +214,12 @@ const styles = {
         marginBottom: '2rem',
     },
     backButton: {
-        background: 'rgba(255, 255, 255, 0.2)',
         backdropFilter: 'blur(10px)',
-        color: 'white',
         padding: '0.75rem 1.5rem',
         borderRadius: '50px',
         fontSize: '1rem',
         fontWeight: '600',
         marginBottom: '1rem',
-        border: '1px solid rgba(255, 255, 255, 0.3)',
         cursor: 'pointer',
         transition: 'all 0.3s ease',
     },
@@ -231,7 +227,6 @@ const styles = {
         textAlign: 'center',
     },
     layoutName: {
-        color: 'white',
         fontSize: '2rem',
         fontWeight: '800',
         fontFamily: 'Poppins, sans-serif',
@@ -253,7 +248,6 @@ const styles = {
         transition: 'width 0.5s ease',
     },
     progressText: {
-        color: 'white',
         fontSize: '1rem',
         fontWeight: '600',
         opacity: 0.9,
@@ -368,9 +362,7 @@ const styles = {
         position: 'absolute',
         top: '1.5rem',
         left: '1.5rem',
-        background: 'rgba(0, 0, 0, 0.7)',
         backdropFilter: 'blur(10px)',
-        color: 'white',
         padding: '0.75rem 1.5rem',
         borderRadius: '50px',
         fontSize: '1.1rem',
@@ -419,13 +411,11 @@ const styles = {
     completionTitle: {
         fontSize: '2rem',
         fontWeight: '800',
-        color: '#1F2937',
         marginBottom: '1rem',
         fontFamily: 'Poppins, sans-serif',
     },
     completionText: {
         fontSize: '1.1rem',
-        color: '#6B7280',
     },
 
     // Preview Section
@@ -441,7 +431,6 @@ const styles = {
     previewTitle: {
         fontSize: '1.5rem',
         fontWeight: '800',
-        color: '#1F2937',
         marginBottom: '1.5rem',
         fontFamily: 'Poppins, sans-serif',
         display: 'flex',
@@ -502,7 +491,6 @@ const styles = {
     placeholderText: {
         fontSize: '1rem',
         fontWeight: '600',
-        color: '#9CA3AF',
     },
 };
 
