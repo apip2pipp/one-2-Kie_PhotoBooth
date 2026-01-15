@@ -15,7 +15,7 @@ const LayoutSelection = ({ onSelectLayout, theme, toggleTheme }) => {
             {/* Back Button */}
             <button
                 onClick={() => window.location.reload()}
-                style={styles.backButton}
+                style={{ ...styles.backButton, color: colors.textSecondary }}
                 onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
                 onMouseLeave={(e) => e.currentTarget.style.opacity = '0.7'}
             >
@@ -24,8 +24,8 @@ const LayoutSelection = ({ onSelectLayout, theme, toggleTheme }) => {
 
             {/* Header */}
             <div style={styles.header}>
-                <h1 style={styles.title}>Select Your Layout</h1>
-                <p style={styles.subtitle}>Choose how you want to capture the moment</p>
+                <h1 style={{ ...styles.title, color: colors.text }}>Select Your Layout</h1>
+                <p style={{ ...styles.subtitle, color: colors.textSecondary }}>Choose how you want to capture the moment</p>
             </div>
 
             {/* Layout Grid */}
@@ -33,19 +33,19 @@ const LayoutSelection = ({ onSelectLayout, theme, toggleTheme }) => {
                 {layoutArray.map((layout, index) => (
                     <div
                         key={layout.id}
-                        style={styles.layoutCard}
+                        style={{ ...styles.layoutCard, background: colors.cardBg, border: `1px solid ${colors.cardBorder}` }}
                         onClick={() => onSelectLayout(layout.id)}
                         onMouseEnter={(e) => {
                             e.currentTarget.style.transform = 'translateY(-8px)';
-                            e.currentTarget.style.boxShadow = '0 20px 40px rgba(236, 72, 153, 0.3)';
+                            e.currentTarget.style.boxShadow = theme === 'dark' ? '0 20px 40px rgba(236, 72, 153, 0.3)' : '0 20px 40px rgba(0, 0, 0, 0.1)';
                         }}
                         onMouseLeave={(e) => {
                             e.currentTarget.style.transform = 'translateY(0)';
-                            e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.4)';
+                            e.currentTarget.style.boxShadow = theme === 'dark' ? '0 8px 24px rgba(0, 0, 0, 0.4)' : '0 4px 12px rgba(0, 0, 0, 0.08)';
                         }}
                     >
                         {/* Selection Circle Icon */}
-                        <div style={styles.selectCircle}>
+                        <div style={{ ...styles.selectCircle, border: `2px solid ${colors.textSecondary}` }}>
                             <div style={styles.selectCircleInner}></div>
                         </div>
 
@@ -56,10 +56,10 @@ const LayoutSelection = ({ onSelectLayout, theme, toggleTheme }) => {
 
                         {/* Layout Info */}
                         <div style={styles.layoutInfo}>
-                            <h2 style={styles.layoutName}>
+                            <h2 style={{ ...styles.layoutName, color: colors.text }}>
                                 {getLayoutDisplayName(layout.id)}
                             </h2>
-                            <p style={styles.layoutDescription}>{layout.description}</p>
+                            <p style={{ ...styles.layoutDescription, color: colors.textSecondary }}>{layout.description}</p>
                         </div>
                     </div>
                 ))}
@@ -125,7 +125,6 @@ const styles = {
         top: '2rem',
         left: '2rem',
         background: 'transparent',
-        color: 'rgba(255, 255, 255, 0.7)',
         border: 'none',
         fontSize: '1rem',
         fontWeight: '500',
@@ -141,43 +140,38 @@ const styles = {
     // Header
     header: {
         textAlign: 'center',
-        marginBottom: '4rem',
-        paddingTop: '3rem',
+        marginBottom: '2.5rem',
+        paddingTop: '2rem',
     },
     title: {
-        fontSize: '3rem',
+        fontSize: '2.5rem',
         fontWeight: '800',
         fontFamily: 'Poppins, sans-serif',
-        color: '#FFFFFF',
-        marginBottom: '0.75rem',
+        marginBottom: '0.5rem',
         letterSpacing: '-0.5px',
     },
     subtitle: {
-        fontSize: '1.1rem',
-        color: 'rgba(255, 255, 255, 0.6)',
+        fontSize: '1rem',
         fontWeight: '400',
     },
 
     // Layout Grid
     layoutGrid: {
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '2rem',
-        maxWidth: '1200px',
+        gridTemplateColumns: 'repeat(4, 1fr)',
+        gap: '1.5rem',
+        maxWidth: '1400px',
         margin: '0 auto',
-        padding: '0 1rem',
+        padding: '0 2rem',
     },
 
     // Layout Card
     layoutCard: {
-        background: 'rgba(255, 255, 255, 0.05)',
         backdropFilter: 'blur(10px)',
-        borderRadius: '24px',
-        padding: '2rem',
+        borderRadius: '20px',
+        padding: '1.5rem',
         cursor: 'pointer',
         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
@@ -192,7 +186,6 @@ const styles = {
         width: '24px',
         height: '24px',
         borderRadius: '50%',
-        border: '2px solid rgba(255, 255, 255, 0.3)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -208,37 +201,37 @@ const styles = {
     // Layout Preview
     layoutPreview: {
         width: '100%',
-        marginBottom: '1.5rem',
+        marginBottom: '1rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '280px',
+        minHeight: '200px',
     },
     previewContainerVertical: {
         display: 'flex',
         flexDirection: 'column',
-        gap: '0.5rem',
+        gap: '0.4rem',
         width: '100%',
-        maxWidth: '180px',
+        maxWidth: '140px',
     },
     previewContainerGrid: {
         display: 'grid',
         gridTemplateColumns: 'repeat(2, 1fr)',
-        gap: '0.5rem',
+        gap: '0.4rem',
         width: '100%',
-        maxWidth: '200px',
+        maxWidth: '160px',
     },
     previewBox: {
         aspectRatio: '4/3',
-        background: 'linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)',
-        borderRadius: '10px',
-        border: '2px solid rgba(0, 0, 0, 0.3)',
+        background: '#FFFFFF',
+        borderRadius: '8px',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
     },
     previewBoxGrid: {
         aspectRatio: '1/1',
-        background: 'linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%)',
-        borderRadius: '10px',
-        border: '2px solid rgba(0, 0, 0, 0.3)',
+        background: '#FFFFFF',
+        borderRadius: '8px',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
     },
 
     // Layout Info
@@ -247,17 +240,15 @@ const styles = {
         width: '100%',
     },
     layoutName: {
-        fontSize: '1.5rem',
+        fontSize: '1.2rem',
         fontWeight: '700',
-        color: '#FFFFFF',
-        marginBottom: '0.5rem',
+        marginBottom: '0.4rem',
         fontFamily: 'Poppins, sans-serif',
     },
     layoutDescription: {
-        color: 'rgba(255, 255, 255, 0.6)',
-        fontSize: '0.9rem',
+        fontSize: '0.85rem',
         fontWeight: '400',
-        lineHeight: '1.5',
+        lineHeight: '1.4',
     },
 };
 
