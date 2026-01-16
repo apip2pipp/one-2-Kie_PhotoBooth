@@ -226,7 +226,7 @@ const LandingPage = ({ onGetStarted, theme, toggleTheme }) => {
                     <div style={styles.aboutContent}>
                         <div style={{ ...styles.aboutCard, background: colors.cardBg, border: `1px solid ${colors.cardBorder}` }}>
                             <div style={styles.aboutIcon}>👨‍💻</div>
-                            <h3 style={{ ...styles.aboutName, color: colors.text }}>One 2 Kie Team</h3>
+                            <h3 style={{ ...styles.aboutName, color: colors.text }}>Kieee Zakie</h3>
                             <p style={{ ...styles.aboutDescription, color: colors.textSecondary }}>
                                 One 2 Kie Photo Booth dibuat dengan ❤️ untuk memberikan pengalaman photo booth
                                 yang menyenangkan dan mudah diakses oleh siapa saja.
